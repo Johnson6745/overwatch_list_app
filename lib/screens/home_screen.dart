@@ -1,5 +1,6 @@
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
+import 'package:overwatch_list_app/services/analytics_service.dart';
 import '../services/data_sync_service.dart';
 import 'character_screen.dart';
 import 'maps_screen.dart';
@@ -17,6 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    AnalyticsService.logReturnToHomeScreen();
     _init();
   }
 

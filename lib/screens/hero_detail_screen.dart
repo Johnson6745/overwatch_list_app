@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:overwatch_list_app/services/analytics_service.dart';
 import '../models/hero_model.dart';
 import '../services/local_database.dart';
 
@@ -25,6 +26,7 @@ class _HeroDetailScreenState extends State<HeroDetailScreen> {
     if (_isFavorite) {
       await _localDb.removeFavoriteHero(widget.hero.name);
     } else {
+      await AnalyticsService.logFavouriteAdded(widget.hero.name);
       await _localDb.addFavoriteHero(widget.hero.name);
     }
     setState(() => _isFavorite = !_isFavorite);

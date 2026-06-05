@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:overwatch_list_app/screens/favourites_screen.dart';
+import 'package:overwatch_list_app/services/analytics_service.dart';
 import '../models/hero_model.dart';
 import '../services/local_database.dart';
 import '../widgets/grid.dart';
@@ -67,10 +68,11 @@ class _HeroesScreenState extends State<HeroesScreen> {
         getTitle: (hero) => hero.name,
         getSubtitle: (hero) => hero.role.toUpperCase(),
         getImageUrl: (hero) => hero.portrait,
-        onTap: (hero) => Navigator.push(
-          context,
-          MaterialPageRoute(builder: (_) => HeroDetailScreen(hero: hero)),
-        ),
+        onTap: (hero) async {
+          await AnalyticsService.logHeroClick(hero.name);
+          Navigator.push(context,
+              MaterialPageRoute(builder: (_) => HeroDetailScreen(hero: hero)));
+        },
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: 0,
