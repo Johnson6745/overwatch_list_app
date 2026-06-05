@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:overwatch_list_app/screens/home_screen.dart';
+import 'package:overwatch_list_app/services/data_sync_service.dart';
+import 'services/local_database.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Hive.initFlutter();
+
+  await Hive.openBox(LocalDatabase.mapsBoxName);
+  await Hive.openBox(LocalDatabase.heroesBoxName);
+  await SyncService.loadInitialDataIfNeeded();
   runApp(const MyApp());
 }
 

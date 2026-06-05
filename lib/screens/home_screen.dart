@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'character_screen.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -22,7 +24,12 @@ class HomeScreen extends StatelessWidget {
                 icon: Icons.people,
                 onPressed: () {
 
-                  print('Kliknięto Postacie');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const HeroesScreen(),
+                    ),
+                  );
                 },
               ),
               const SizedBox(height: 20),
