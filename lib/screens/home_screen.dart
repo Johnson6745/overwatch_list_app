@@ -1,12 +1,36 @@
 import 'package:flutter/material.dart';
-
+import '../services/data_sync_service.dart';
 import 'character_screen.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget { // zmień na StatefulWidget
   const HomeScreen({super.key});
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  bool _isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _init();
+  }
+
+  Future<void> _init() async {
+    await SyncService.loadInitialDataIfNeeded();
+    if (mounted) setState(() => _isLoading = false);
+  }
+
 
   @override
   Widget build(BuildContext context) {
+    if (_isLoading) {
+      return const Scaffold(
+        body: Center(child: CircularProgressIndicator()),
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Strona Główna'),
@@ -27,7 +51,7 @@ class HomeScreen extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const HeroesScreen(),
+                      builder: (context) =>  HeroesScreen(),
                     ),
                   );
                 },
