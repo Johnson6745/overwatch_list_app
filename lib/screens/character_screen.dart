@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:overwatch_list_app/screens/favourites_screen.dart';
 import '../models/hero_model.dart';
 import '../services/local_database.dart';
 import '../widgets/grid.dart';
 import 'hero_filter_screen.dart';
 import 'maps_screen.dart';
-
+import 'hero_detail_screen.dart';
 class HeroesScreen extends StatefulWidget {
   const HeroesScreen({super.key});
 
@@ -66,6 +67,10 @@ class _HeroesScreenState extends State<HeroesScreen> {
         getTitle: (hero) => hero.name,
         getSubtitle: (hero) => hero.role.toUpperCase(),
         getImageUrl: (hero) => hero.portrait,
+        onTap: (hero) => Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => HeroDetailScreen(hero: hero)),
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: 0,
@@ -73,6 +78,9 @@ class _HeroesScreenState extends State<HeroesScreen> {
           if (index == 0) return;
           if (index == 1) {
             Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => MapScreen()));
+          }
+          if(index ==2) {
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => FavoritesScreen()));
           }
 
         },

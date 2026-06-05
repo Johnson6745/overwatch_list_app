@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import '../services/data_sync_service.dart';
 import 'character_screen.dart';
+import 'maps_screen.dart';
+import 'favourites_screen.dart';
 
-class HomeScreen extends StatefulWidget { // zmień na StatefulWidget
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -61,7 +63,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 title: 'Mapy',
                 icon: Icons.map,
                 onPressed: () {
-                  print('Kliknięto Mapy');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>  MapScreen(),
+                    ),
+                  );
                 },
               ),
               const SizedBox(height: 20),
@@ -69,7 +76,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 title: 'Ulubione',
                 icon: Icons.favorite,
                 onPressed: () {
-                  print('Kliknięto Ulubione');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>  FavoritesScreen(),
+                    ),
+                  );
                 },
               ),
             ],

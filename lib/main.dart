@@ -11,6 +11,7 @@ void main() async {
 
   await Hive.openBox(LocalDatabase.mapsBoxName);
   await Hive.openBox(LocalDatabase.heroesBoxName);
+  await Hive.openBox(LocalDatabase.favoritesBoxName);
   runApp(const MyApp());
 }
 

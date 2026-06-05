@@ -5,6 +5,7 @@ class CustomGridView<T> extends StatelessWidget {
   final String Function(T item) getTitle;
   final String Function(T item) getSubtitle;
   final String Function(T item) getImageUrl;
+  final void Function(T item)? onTap;
 
   const CustomGridView({
     super.key,
@@ -12,6 +13,7 @@ class CustomGridView<T> extends StatelessWidget {
     required this.getTitle,
     required this.getSubtitle,
     required this.getImageUrl,
+    this.onTap,
   });
 
   @override
@@ -33,8 +35,10 @@ class CustomGridView<T> extends StatelessWidget {
       itemCount: items.length,
       itemBuilder: (context, index) {
         final item = items[index];
-
-        return Card(
+        return GestureDetector(
+            onTap: () => onTap?.call(item),
+            child:
+            Card(
           clipBehavior: Clip.antiAlias,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
           elevation: 4,
@@ -78,7 +82,7 @@ class CustomGridView<T> extends StatelessWidget {
               ),
             ],
           ),
-        );
+        ));
       },
     );
   }

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:overwatch_list_app/screens/favourites_screen.dart';
 import '../models/map_model.dart';
 import '../services/local_database.dart';
 import '../widgets/grid.dart';
 import 'map_filter_screen.dart';
 import 'character_screen.dart';
-
+import 'map_detail_screen.dart';
 class MapScreen extends StatefulWidget {
   const MapScreen({super.key});
 
@@ -67,6 +68,10 @@ class _MapScreenState extends State<MapScreen> {
         getTitle: (map) => map.name,
         getSubtitle: (map) => map.gamemode.toUpperCase(),
         getImageUrl: (map) => map.screenshot,
+        onTap: (map) => Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => MapDetailScreen(map: map)),
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: 1,
@@ -77,6 +82,9 @@ class _MapScreenState extends State<MapScreen> {
           if (index == 1) {
             return;
 
+          }
+          if(index == 2){
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => FavoritesScreen()));
           }
 
         },
