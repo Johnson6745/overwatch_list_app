@@ -3,6 +3,8 @@ import 'package:overwatch_list_app/screens/home_screen.dart';
 import 'package:overwatch_list_app/services/data_sync_service.dart';
 import 'services/local_database.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,7 +14,8 @@ void main() async {
   await Hive.openBox(LocalDatabase.mapsBoxName);
   await Hive.openBox(LocalDatabase.heroesBoxName);
   await Hive.openBox(LocalDatabase.favoritesBoxName);
-  await Hive.box(LocalDatabase.heroesBoxName).clear();
+  await Firebase.initializeApp();
+  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
   runApp(const MyApp());
 }
 

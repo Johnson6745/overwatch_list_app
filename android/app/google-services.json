@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "47296248765",
+    "project_id": "overwatch-database-uken",
+    "storage_bucket": "overwatch-database-uken.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:47296248765:android:c793a9f76d1a747155b0d4",
+        "android_client_info": {
+          "package_name": "com.uken.overwatch_app.overwatch_list_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYMEp2QK47CXbyP0pp8RlggdLE8pou86E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

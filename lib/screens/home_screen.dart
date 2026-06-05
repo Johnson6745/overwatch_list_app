@@ -1,3 +1,4 @@
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import '../services/data_sync_service.dart';
 import 'character_screen.dart';
@@ -39,7 +40,10 @@ class _HomeScreenState extends State<HomeScreen> {
       );
     }
 
+
+
     return Scaffold(
+
       appBar: AppBar(title: const Text('OVERWATCH LIST')),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
@@ -90,10 +94,18 @@ class _HomeScreenState extends State<HomeScreen> {
               onPressed: () => Navigator.push(context,
                   MaterialPageRoute(builder: (_) => const FavoritesScreen())),
             ),
+            // ElevatedButton(
+            //   onPressed: () {
+            //     FirebaseCrashlytics.instance.crash();
+            //   },
+            //   child: const Text("Test crash"),
+            // ),
           ],
         ),
       ),
+
     );
+
   }
 
   Widget _buildMenuButton({
