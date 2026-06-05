@@ -81,10 +81,26 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
         currentIndex: 2,
         onTap: (index) {
           if (index == 0) {
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => HeroesScreen()));
+            Navigator.pushReplacement(context,  PageRouteBuilder(
+              pageBuilder: (context, animation, secondaryAnimation) => HeroesScreen(),
+              transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                return FadeTransition(
+                  opacity: animation,
+                  child: child,
+                );
+              },
+            ),);
           };
           if (index == 1) {
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => MapScreen()));
+            Navigator.pushReplacement(context,  PageRouteBuilder(
+              pageBuilder: (context, animation, secondaryAnimation) => MapScreen(),
+              transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                return FadeTransition(
+                  opacity: animation,
+                  child: child,
+                );
+              },
+            ),);
           }
           if(index == 2){
             return;

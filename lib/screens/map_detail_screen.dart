@@ -83,7 +83,7 @@ class _MapDetailScreenState extends State<MapDetailScreen> {
                   const SizedBox(height: 8),
                   Chip(
                     label: Text(
-                      map.gamemode.toUpperCase(),
+                      'Gamemode: ${map.gamemode.toUpperCase()}'.toUpperCase(),
                       style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),

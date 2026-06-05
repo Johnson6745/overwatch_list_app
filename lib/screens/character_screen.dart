@@ -77,10 +77,26 @@ class _HeroesScreenState extends State<HeroesScreen> {
         onTap: (index) {
           if (index == 0) return;
           if (index == 1) {
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => MapScreen()));
+            Navigator.pushReplacement(context,  PageRouteBuilder(
+              pageBuilder: (context, animation, secondaryAnimation) => MapScreen(),
+              transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                return FadeTransition(
+                  opacity: animation,
+                  child: child,
+                );
+              },
+            ),);
           }
           if(index ==2) {
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => FavoritesScreen()));
+            Navigator.pushReplacement(context,  PageRouteBuilder(
+              pageBuilder: (context, animation, secondaryAnimation) => FavoritesScreen(),
+              transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                return FadeTransition(
+                  opacity: animation,
+                  child: child,
+                );
+              },
+            ),);
           }
 
         },

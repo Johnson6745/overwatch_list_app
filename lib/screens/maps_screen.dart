@@ -77,14 +77,30 @@ class _MapScreenState extends State<MapScreen> {
         currentIndex: 1,
         onTap: (index) {
           if (index == 0){
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const HeroesScreen()));
+            Navigator.pushReplacement(context,  PageRouteBuilder(
+              pageBuilder: (context, animation, secondaryAnimation) => HeroesScreen(),
+              transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                return FadeTransition(
+                  opacity: animation,
+                  child: child,
+                );
+              },
+            ),);
           }
           if (index == 1) {
             return;
 
           }
           if(index == 2){
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => FavoritesScreen()));
+            Navigator.pushReplacement(context,  PageRouteBuilder(
+              pageBuilder: (context, animation, secondaryAnimation) => FavoritesScreen(),
+              transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                return FadeTransition(
+                  opacity: animation,
+                  child: child,
+                );
+              },
+            ),);
           }
 
         },
