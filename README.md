@@ -20,7 +20,7 @@ Mobilna aplikacja Flutter do przeglądania postaci i map z gry Overwatch.
 
 ## Motywy
 
-Aplikacja oferuje trzy motywy: Ciemny/Gaming, Jasny/Minimalistyczny oraz Overwatch Orange.
+Aplikacja oferuje trzy motywy: Ciemny, Jasny oraz Overwatch Style.
 
 ## API
 
