@@ -34,6 +34,7 @@ class ApiService {
 
     } catch (e) {
       log('Wystąpił błąd sieci: $e', name: 'API');
+      rethrow;
     }
   }
 }

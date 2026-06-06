@@ -14,7 +14,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   bool _isLoading = true;
-
+  bool _hasError = false;
   @override
   void initState() {
     super.initState();
@@ -27,6 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
       await SyncService.loadInitialDataIfNeeded();
     } catch (e) {
       debugPrint('Błąd inicjalizacji: $e');
+      if (mounted) setState(() => _hasError = true);
     } finally {
       if (mounted) setState(() => _isLoading = false);
     }
@@ -39,8 +40,58 @@ class _HomeScreenState extends State<HomeScreen> {
     if (_isLoading) {
       return Scaffold(
         body: Center(
-          child: CircularProgressIndicator(
-            color: theme.colorScheme.primary,
+          child: CircularProgressIndicator(color: theme.colorScheme.primary),
+        ),
+      );
+    }
+
+    if (_hasError) {
+      return Scaffold(
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(32),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.wifi_off_rounded,
+                    size: 64, color: theme.colorScheme.primary.withOpacity(0.5)),
+                const SizedBox(height: 24),
+                Text(
+                  'Brak połączenia',
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.w600,
+                    color: theme.colorScheme.onSurface,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  'Nie udało się pobrać danych.\n '
+                      'Sprawdź połączenie z internetem.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: theme.colorScheme.onSurface.withOpacity(0.5),
+                  ),
+                ),
+                const SizedBox(height: 32),
+                ElevatedButton.icon(
+                  onPressed: () {
+                    setState(() {
+                      _isLoading = true;
+                      _hasError = false;
+                    });
+                    _init();
+                  },
+                  icon: const Icon(Icons.refresh),
+                  label: const Text('Spróbuj ponownie'),
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 24, vertical: 14),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       );

@@ -6,8 +6,8 @@ class CustomGridView<T> extends StatelessWidget {
   final String Function(T item) getSubtitle;
   final String Function(T item) getImageUrl;
   final void Function(T item)? onTap;
-
-  const CustomGridView({
+  bool _snackbarShown = false;
+  CustomGridView({
     super.key,
     required this.items,
     required this.getTitle,
@@ -33,6 +33,7 @@ class CustomGridView<T> extends StatelessWidget {
         mainAxisSpacing: 12,
       ),
       itemCount: items.length,
+
       itemBuilder: (context, index) {
         final item = items[index];
         return GestureDetector(
@@ -51,11 +52,29 @@ class CustomGridView<T> extends StatelessWidget {
                   child: Image.network(
                     getImageUrl(item),
                     fit: BoxFit.cover,
-                    errorBuilder: (_, __, ___) => const Icon(
-                      Icons.broken_image,
-                      size: 50,
-                      color: Colors.grey,
-                    ),
+                    errorBuilder: (context, error, stackTrace) {
+                      if (!_snackbarShown) {
+                        _snackbarShown = true;
+                        WidgetsBinding.instance.addPostFrameCallback((_) {
+                          if (context.mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: const Row(
+                                  children: [
+                                    Icon(Icons.wifi_off_rounded, color: Colors.white, size: 18),
+                                    SizedBox(width: 8),
+                                    Text('Brak internetu – nie można załadować zdjęć'),
+                                  ],
+                                ),
+                                backgroundColor: Colors.red[800],
+                                duration: const Duration(seconds: 3),
+                              ),
+                            );
+                          }
+                        });
+                      }
+                      return const Icon(Icons.broken_image, size: 50, color: Colors.grey);
+                    },
                   ),
                 ),
               ),
