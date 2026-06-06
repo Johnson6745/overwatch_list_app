@@ -1,5 +1,5 @@
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
+import 'package:overwatch_list_app/screens/settings_screen.dart';
 import 'package:overwatch_list_app/services/analytics_service.dart';
 import '../services/data_sync_service.dart';
 import 'character_screen.dart';
@@ -34,18 +34,19 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     if (_isLoading) {
-      return const Scaffold(
+      return Scaffold(
         body: Center(
-          child: CircularProgressIndicator(color: Color(0xFFF99E1A)),
+          child: CircularProgressIndicator(
+            color: theme.colorScheme.primary,
+          ),
         ),
       );
     }
 
-
-
     return Scaffold(
-
       appBar: AppBar(title: const Text('OVERWATCH LIST')),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
@@ -53,33 +54,39 @@ class _HomeScreenState extends State<HomeScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const Text(
+            Text(
               'Overwatch',
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 28, fontWeight: FontWeight.w600, color: Colors.white),
+              style: TextStyle(
+                fontSize: 28,
+                fontWeight: FontWeight.w600,
+                color: theme.colorScheme.onSurface,
+              ),
             ),
             const SizedBox(height: 4),
-            const Text(
+            Text(
               'DATABASE',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 12,
                 letterSpacing: 4,
-                color: Color(0xFFF99E1A),
+                color: theme.colorScheme.primary,
                 fontWeight: FontWeight.w500,
               ),
             ),
             const SizedBox(height: 48),
             _buildMenuButton(
+              context: context,
               title: 'Postacie',
               subtitle: 'Przeglądaj bohaterów',
               icon: Icons.person_outline,
-              accentColor: const Color(0xFFF99E1A),
+              accentColor: theme.colorScheme.primary,
               onPressed: () => Navigator.push(context,
                   MaterialPageRoute(builder: (_) => const HeroesScreen())),
             ),
             const SizedBox(height: 12),
             _buildMenuButton(
+              context: context,
               title: 'Mapy',
               subtitle: 'Przeglądaj mapy',
               icon: Icons.map_outlined,
@@ -89,6 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             const SizedBox(height: 12),
             _buildMenuButton(
+              context: context,
               title: 'Ulubione',
               subtitle: 'Twoja kolekcja',
               icon: Icons.favorite_outline,
@@ -96,29 +104,34 @@ class _HomeScreenState extends State<HomeScreen> {
               onPressed: () => Navigator.push(context,
                   MaterialPageRoute(builder: (_) => const FavoritesScreen())),
             ),
-            // ElevatedButton(
-            //   onPressed: () {
-            //     FirebaseCrashlytics.instance.crash();
-            //   },
-            //   child: const Text("Test crash"),
-            // ),
+            const SizedBox(height: 12),
+            _buildMenuButton(
+              context: context,
+              title: 'Ustawienia',
+              subtitle: 'Motyw i dane',
+              icon: Icons.settings_outlined,
+              accentColor: theme.colorScheme.onSurface.withOpacity(0.5),
+              onPressed: () => Navigator.push(context,
+                  MaterialPageRoute(builder: (_) => const SettingsScreen())),
+            ),
           ],
         ),
       ),
-
     );
-
   }
 
   Widget _buildMenuButton({
+    required BuildContext context,
     required String title,
     required String subtitle,
     required IconData icon,
     required Color accentColor,
     required VoidCallback onPressed,
   }) {
+    final theme = Theme.of(context);
+
     return Material(
-      color: const Color(0xFF141414),
+      color: theme.cardTheme.color,
       borderRadius: BorderRadius.circular(12),
       child: InkWell(
         onTap: onPressed,
@@ -127,7 +140,7 @@ class _HomeScreenState extends State<HomeScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: const Color(0xFF222222)),
+            border: Border.all(color: theme.dividerColor),
           ),
           child: Row(
             children: [
@@ -145,16 +158,26 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(title,
-                        style: const TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.w600, color: Colors.white)),
+                    Text(
+                      title,
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
+                        color: theme.colorScheme.onSurface,
+                      ),
+                    ),
                     const SizedBox(height: 2),
-                    Text(subtitle,
-                        style: const TextStyle(fontSize: 12, color: Color(0xFF666666))),
+                    Text(
+                      subtitle,
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: theme.textTheme.bodySmall?.color,
+                      ),
+                    ),
                   ],
                 ),
               ),
-              const Icon(Icons.chevron_right, color: Color(0xFF444444), size: 20),
+              Icon(Icons.chevron_right, color: theme.dividerColor, size: 20),
             ],
           ),
         ),

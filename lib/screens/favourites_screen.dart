@@ -56,7 +56,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
               onTap: () async {
                 await Navigator.push(context,
                     MaterialPageRoute(builder: (_) => HeroDetailScreen(hero: hero)));
-                _loadFavorites(); // odśwież po powrocie
+                _loadFavorites();
               },
             )),
             const SizedBox(height: 16),
