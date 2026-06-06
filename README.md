@@ -1,17 +1,29 @@
-# overwatch_list_app
+# Overwatch List App
 
-Aplikacja pokazująca wszystkie aktualne postacie oraz mapy z gry Overwatch.
+Mobilna aplikacja Flutter do przeglądania postaci i map z gry Overwatch.
 
-## Getting Started
+## Funkcjonalności
 
-This project is a starting point for a Flutter application.
+- 📋 **Lista postaci** – przeglądanie wszystkich bohaterów z filtrowaniem po nazwie i roli
+- 🗺️ **Lista map** – przeglądanie map z filtrowaniem po nazwie i trybie gry
+- ⭐ **Ulubione** – dodawanie postaci i map do ulubionych
+- 🔧 **Ustawienia** – zmiana motywu aplikacji oraz ręczne odświeżanie danych z API
+- 📴 **Tryb offline** – dane przechowywane lokalnie w Hive
 
-A few resources to get you started if this is your first Flutter project:
+## Technologie
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+- **Flutter** – framework mobilny
+- **Hive** – lokalna baza danych
+- **Firebase Analytics** – analityka eventów
+- **Firebase Crashlytics** – monitoring błędów
+- **OverFast API** – źródło danych o postaciach i mapach
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Motywy
+
+Aplikacja oferuje trzy motywy: Ciemny/Gaming, Jasny/Minimalistyczny oraz Overwatch Orange.
+
+## API
+
+Dane pobierane są z publicznego API:
+- `GET https://overfast-api.tekrop.fr/heroes`
+- `GET https://overfast-api.tekrop.fr/maps`
