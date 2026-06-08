@@ -23,4 +23,14 @@ class AnalyticsService {
       name: 'return_to_home',
     );
   }
+  static Future<void> logFavouriteMapAdded(String map_name) async {
+    await _analytics.logEvent(
+      name: 'favourite_added',
+      parameters: {
+        'map_name': map_name,
+      },
+
+    );
+  }
 }
+

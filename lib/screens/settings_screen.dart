@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
 import '../app_themes.dart';
 import '../services/theme_provider.dart';
@@ -21,7 +22,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       final db = LocalDatabase();
       await db.saveMaps([]);
       await db.saveHeroes([]);
-
+      await Hive.box(LocalDatabase.heroDetailsBoxName).clear();
       await ApiService().fetchAndSaveData();
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(

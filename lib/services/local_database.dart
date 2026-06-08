@@ -7,7 +7,8 @@ class LocalDatabase {
   static const String mapsBoxName = 'maps_box';
   static const String heroesBoxName = 'heroes_box';
   static const String favoritesBoxName = 'favorites_box';
-  
+  static const String heroDetailsBoxName = 'hero_details_box';
+
   Future<void> saveMaps(List<dynamic> maps) async {
     final box = Hive.box(mapsBoxName);
     await box.put('data', maps);
@@ -82,5 +83,17 @@ class LocalDatabase {
   List<String> getFavoriteMapNames() {
     final box = Hive.box(favoritesBoxName);
     return List<String>.from(box.get('maps', defaultValue: []));
+  }
+
+  Future<void> saveHeroDetail(String heroKey, Map<String, dynamic> data) async {
+    final box = Hive.box(heroDetailsBoxName);
+    await box.put(heroKey, data);
+    log('Zapisano szczegóły herosa: $heroKey', name: 'LocalDB');
+  }
+
+  Map<String, dynamic>? getHeroDetail(String heroKey) {
+    final box = Hive.box(heroDetailsBoxName);
+    final data = box.get(heroKey);
+    return data != null ? Map<String, dynamic>.from(data as Map) : null;
   }
 }

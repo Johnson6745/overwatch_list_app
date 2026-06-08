@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../services/analytics_service.dart';
 import '../models/map_model.dart';
 import '../services/local_database.dart';
 
@@ -25,6 +26,7 @@ class _MapDetailScreenState extends State<MapDetailScreen> {
     if (_isFavorite) {
       await _localDb.removeFavoriteMap(widget.map.name);
     } else {
+      await AnalyticsService.logFavouriteMapAdded(widget.map.name);
       await _localDb.addFavoriteMap(widget.map.name);
     }
     setState(() => _isFavorite = !_isFavorite);

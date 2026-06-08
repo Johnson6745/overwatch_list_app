@@ -42,7 +42,7 @@ class AppThemes {
     scaffoldBackgroundColor: const Color(0xFF0A0A0A),
     colorScheme: const ColorScheme.dark(
       primary: Color(0xFF6A329F),
-      secondary: Color(0xFFF99E1A),
+      secondary: Color(0xFF6A329F),
       surface: Color(0xFF111111),
     ),
     appBarTheme: const AppBarTheme(
@@ -54,19 +54,19 @@ class AppThemes {
         fontSize: 14, fontWeight: FontWeight.w600,
         letterSpacing: 1.5, color: Colors.white,
       ),
-      iconTheme: IconThemeData(color: Color(0xFFF99E1A)),
+      iconTheme: IconThemeData(color: Color(0xFF6A329F)),
     ),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: Color(0xFF111111),
-      selectedItemColor: Color(0xFFF99E1A),
+      selectedItemColor: Color(0xFF6A329F),
       unselectedItemColor: Color(0xFF555555),
       elevation: 0,
       type: BottomNavigationBarType.fixed,
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        backgroundColor: const Color(0xFFF99E1A),
-        foregroundColor: const Color(0xFF0A0A0A),
+        backgroundColor: const Color(0xFF6A329F),
+        foregroundColor: Colors.white,
         textStyle: const TextStyle(fontWeight: FontWeight.w600),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       ),
@@ -93,7 +93,7 @@ class AppThemes {
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10),
-        borderSide: const BorderSide(color: Color(0xFFF99E1A)),
+        borderSide: const BorderSide(color: Color(0xFF6A329F)),
       ),
     ),
     cardTheme: CardThemeData(

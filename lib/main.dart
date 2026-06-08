@@ -16,6 +16,8 @@ void main() async {
   await Hive.openBox(LocalDatabase.mapsBoxName);
   await Hive.openBox(LocalDatabase.heroesBoxName);
   await Hive.openBox(LocalDatabase.favoritesBoxName);
+  await Hive.openBox(LocalDatabase.heroDetailsBoxName);
+
   await Firebase.initializeApp();
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
   await Hive.openBox('settings_box');
