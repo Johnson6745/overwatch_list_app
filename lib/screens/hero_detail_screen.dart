@@ -15,9 +15,10 @@ class HeroDetailScreen extends StatefulWidget {
 class _HeroDetailScreenState extends State<HeroDetailScreen> {
   final LocalDatabase _localDb = LocalDatabase();
   final ApiService _api = ApiService();
-
+  bool _snackbarShown = false;
   bool _isFavorite = false;
   bool _isLoadingDetail = true;
+  bool _fromCache = false;
   HeroModel? _detailedHero;
 
   @override
@@ -32,6 +33,11 @@ class _HeroDetailScreenState extends State<HeroDetailScreen> {
       setState(() => _isLoadingDetail = false);
       return;
     }
+    final cached = _localDb.getHeroDetail(widget.hero.key);
+    if (cached != null) {
+      setState(() => _fromCache = true);
+    }
+
     final data = await _api.fetchHeroDetail(widget.hero.key);
     if (mounted) {
       setState(() {
@@ -92,11 +98,31 @@ class _HeroDetailScreenState extends State<HeroDetailScreen> {
                   Image.network(
                     hero.largeImage ?? hero.portrait,
                     fit: BoxFit.cover,
-                    errorBuilder: (_, __, ___) => Container(
-                      color: Colors.grey[800],
-                      child: const Icon(Icons.broken_image,
-                          size: 80, color: Colors.grey),
-                    ),
+                    errorBuilder: (context, error, stackTrace) {
+                      if (!_snackbarShown) {
+                        _snackbarShown = true;
+                        WidgetsBinding.instance.addPostFrameCallback((_) {
+                          if (context.mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Row(
+                                  children: [
+                                    const Icon(Icons.wifi_off_rounded, color: Colors.white, size: 18),
+                                    const SizedBox(width: 8),
+                                    Text(_fromCache
+                                        ? 'Brak internetu - nie można załadować zdjęcia\n Zaladowano opis z bazy danych'
+                                        : 'Brak internetu - nie można załadować zdjęcia\n Brak opisu w lokalnej bazie'),
+                                  ],
+                                ),
+                                backgroundColor: Colors.red[800],
+                                duration: const Duration(seconds: 3),
+                              ),
+                            );
+                          }
+                        });
+                      }
+                      return const Icon(Icons.broken_image, size: 50, color: Colors.grey);
+                    },
                   ),
                   DecoratedBox(
                     decoration: BoxDecoration(
