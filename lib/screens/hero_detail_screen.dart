@@ -180,7 +180,7 @@ class _HeroDetailScreenState extends State<HeroDetailScreen> {
                   else ...[
 
                     if (hero.description != null) ...[
-                      _SectionLabel(text: 'FABUŁA', color: primary),
+                      _SectionLabel(text: 'OPIS', color: primary),
                       const SizedBox(height: 10),
                       Text(
                         hero.description!,
